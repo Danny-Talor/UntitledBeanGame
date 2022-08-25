@@ -1,2 +1,1 @@
-# UntitledBeanGame
- Learning Godot and GDScript before version 4.
+![alt text](https://github.com/zebigdt/UntitledBeanGame/blob/main/screenshot.png?raw=true)

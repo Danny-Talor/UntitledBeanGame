@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/goal.gd" type="Script" id=1]
+[ext_resource path="res://assets/Football Goal/football goal.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1.72093, 1, 0.959917 )
+
+[node name="goal" type="StaticBody"]
+transform = Transform( 1.13666, 0, 0, 0, 1.21801, 0, 0, 0, 0.900183, -0.00130343, 0.0181661, -0.00465393 )
+script = ExtResource( 1 )
+
+[node name="goal_area" type="Area" parent="."]
+transform = Transform( 8.26937, 0, 0, 0, 4.81885, 0, 0, 0, 5.80775, 0, 0, -0.199069 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="goal_area"]
+transform = Transform( 0.349763, 0, 0, 0, 0.320285, 0, 0, 0, 0.182979, 0.0218745, 0.340486, -0.00415377 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.0205189, 0, 0, 0, 0.0209799, 0, 0, 0, 0.0303114, -4.93278, 0, 0 )
+mesh = ExtResource( 2 )
+
+[node name="CollisionPolygon" type="CollisionPolygon" parent="."]
+transform = Transform( -8.70352e-09, 0, -0.199113, 0, 1, 0, 1, 0, -4.37114e-08, -4.92551, -0.0241187, 0.0241179 )
+polygon = PoolVector2Array( 0.718581, 3.88779, 0.260332, 4.32192, -2.2721, 4.32192, -2.34445, 0.00472963, 3.1666, -0.0676253 )
+
+[node name="CollisionPolygon2" type="CollisionPolygon" parent="."]
+transform = Transform( -8.70352e-09, 0, -0.199113, 0, 1, 0, 1, 0, -4.37114e-08, 5.30669, -0.0241187, 0.0241179 )
+polygon = PoolVector2Array( 0.718581, 3.88779, 0.260332, 4.32192, -2.2721, 4.32192, -2.34445, 0.00472963, 3.1666, -0.0676253 )
+
+[node name="CollisionPolygon3" type="CollisionPolygon" parent="."]
+transform = Transform( -4.57819e-07, 0, 10.4737, 0, 1, 0, -1, 0, -4.37114e-08, 0.198799, 0.775411, 2.81637 )
+polygon = PoolVector2Array( 2.551, 3.4998, 2.04575, 3.07433, 1.33664, 2.05499, 0.512303, 0.68995, -0.38504, -0.839747, -0.0658677, -0.839747, 0.747263, 0.588931, 1.61359, 2.04801, 2.30752, 3.01019, 2.75588, 3.37496 )
+
+[connection signal="body_entered" from="goal_area" to="." method="_on_goal_area_body_entered"]

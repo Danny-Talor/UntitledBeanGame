@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/confetti.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+params_billboard_mode = 3
+params_grow = true
+params_grow_amount = 0.317
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 1.0
+
+[sub_resource type="ParticlesMaterial" id=2]
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 1, 0 )
+initial_velocity = 2.0
+angular_velocity = 1.0
+angle = 1.0
+angle_random = 0.4
+scale = 6.0
+anim_speed = 1.0
+
+[sub_resource type="QuadMesh" id=3]
+
+[node name="Confetti" type="Particles"]
+transform = Transform( 0.99988, 0.0118976, 0.00985952, -0.0138212, 0.403323, 0.914953, 0.00690912, -0.91498, 0.403439, -0.0204659, 0.0530043, 0.0116472 )
+material_override = SubResource( 4 )
+generate_lightmap = false
+emitting = false
+amount = 32
+lifetime = 5.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+randomness = 0.34
+fract_delta = false
+local_coords = false
+process_material = SubResource( 2 )
+draw_pass_1 = SubResource( 3 )
