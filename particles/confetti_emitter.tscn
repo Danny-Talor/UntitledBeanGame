@@ -1,0 +1,143 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/particles/confetti/ribbon_pink.png" type="Texture" id=1]
+[ext_resource path="res://assets/particles/confetti/ribbon_yellow.png" type="Texture" id=2]
+[ext_resource path="res://assets/particles/confetti/ribbon_blue.png" type="Texture" id=3]
+[ext_resource path="res://assets/particles/confetti/ribbon_green.png" type="Texture" id=4]
+[ext_resource path="res://particles/confetti_emitter.gd" type="Script" id=5]
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 4 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=8]
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=9]
+material = SubResource( 8 )
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 4 )
+
+[sub_resource type="QuadMesh" id=11]
+material = SubResource( 10 )
+
+[node name="confetti_emitter" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="CPUParticles" type="CPUParticles" parent="."]
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.76
+randomness = 0.28
+mesh = SubResource( 5 )
+emission_shape = 5
+emission_ring_radius = 0.01
+emission_ring_inner_radius = 0.0
+emission_ring_height = 16.08
+emission_ring_axis = Vector3( 0, 0, 1 )
+direction = Vector3( 200, 320, 0 )
+spread = 23.12
+flatness = 1.0
+gravity = Vector3( 0, -5, 0 )
+initial_velocity = 10.0
+damping = 0.92
+scale_amount_curve = SubResource( 3 )
+
+[node name="CPUParticles4" type="CPUParticles" parent="."]
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.5
+randomness = 0.28
+mesh = SubResource( 7 )
+emission_shape = 5
+emission_ring_radius = 0.01
+emission_ring_inner_radius = 0.0
+emission_ring_height = 16.08
+emission_ring_axis = Vector3( 0, 0, 1 )
+direction = Vector3( 200, 320, 0 )
+spread = 23.12
+flatness = 1.0
+gravity = Vector3( 0, -5, 0 )
+initial_velocity = 10.0
+damping = 0.92
+scale_amount_curve = SubResource( 3 )
+
+[node name="CPUParticles3" type="CPUParticles" parent="."]
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.71
+randomness = 0.28
+mesh = SubResource( 9 )
+emission_shape = 5
+emission_ring_radius = 0.01
+emission_ring_inner_radius = 0.0
+emission_ring_height = 16.08
+emission_ring_axis = Vector3( 0, 0, 1 )
+direction = Vector3( 100, 320, 0 )
+spread = 18.17
+gravity = Vector3( 2, -5, 0 )
+initial_velocity = 10.0
+damping = 1.84
+scale_amount_curve = SubResource( 3 )
+
+[node name="CPUParticles2" type="CPUParticles" parent="."]
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.71
+randomness = 0.28
+mesh = SubResource( 11 )
+emission_shape = 5
+emission_ring_radius = 0.01
+emission_ring_inner_radius = 0.0
+emission_ring_height = 16.08
+emission_ring_axis = Vector3( 0, 0, 1 )
+direction = Vector3( 200, 320, 0 )
+spread = 16.51
+gravity = Vector3( 0, -5, 0 )
+initial_velocity = 10.0
+damping = 0.92
+scale_amount_curve = SubResource( 3 )

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/texture_04.png-e0c99f7cd10c7f4bb8731ec11912b406.s3tc.stex"
-path.etc2="res://.import/texture_04.png-e0c99f7cd10c7f4bb8731ec11912b406.etc2.stex"
+path.s3tc="res://.import/ribbon_green.png-90762d8ce24b179050acc257f77f9455.s3tc.stex"
+path.etc2="res://.import/ribbon_green.png-90762d8ce24b179050acc257f77f9455.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/dev_textures/Green/texture_04.png"
-dest_files=[ "res://.import/texture_04.png-e0c99f7cd10c7f4bb8731ec11912b406.s3tc.stex", "res://.import/texture_04.png-e0c99f7cd10c7f4bb8731ec11912b406.etc2.stex" ]
+source_file="res://assets/particles/confetti/ribbon_green.png"
+dest_files=[ "res://.import/ribbon_green.png-90762d8ce24b179050acc257f77f9455.s3tc.stex", "res://.import/ribbon_green.png-90762d8ce24b179050acc257f77f9455.etc2.stex" ]
 
 [params]
 

@@ -3,7 +3,11 @@ extends KinematicBody
 onready var player_model = $Spatial
 
 export var movement_speed = 12
+
 export var score = 0
+
+var max_slides = 4
+var floor_max_angle = 0.785398
 
 var gravity_vector = ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 var gravity_magnitude = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -23,7 +27,7 @@ func _physics_process(_delta):
 	if is_on_floor():
 		velocity.y = 0.0
 		
-	velocity = move_and_slide(velocity, Vector3.UP)
+	velocity = move_and_slide(velocity, Vector3.UP, false, max_slides, floor_max_angle, false)
 
 func _input(event):
 	var player_pos = global_transform.origin
@@ -34,8 +38,7 @@ func _input(event):
 		var ray_length = 1000
 		var ray_target = ray_origin + $Camera.project_ray_normal(mouse_position) * ray_length
 		var cursor_location = dropPlane.intersects_ray(ray_origin,ray_target)
-		if not cursor_location == null:
-			$cursor.global_transform.origin = cursor_location
+		if cursor_location:
 			player_model.look_at(cursor_location, Vector3.UP)
 	
 func inc_score():

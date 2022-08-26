@@ -6,4 +6,4 @@ func _on_Area_body_entered(body):
 		body.translation = Vector3(0,10,0)
 		body.set_mode(RigidBody.MODE_RIGID)
 	else:
-		body.translation = Vector3(0,10,0)
+		body.translation = Vector3(0,5,0)
