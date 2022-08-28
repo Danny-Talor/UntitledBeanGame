@@ -12,13 +12,14 @@ params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_texture = ExtResource( 3 )
+albedo_texture = ExtResource( 2 )
 
 [sub_resource type="QuadMesh" id=5]
 material = SubResource( 4 )
 
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+max_value = 2.0
+_data = [ Vector2( 0, 1.31591 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.243182 ), -3.73334, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=6]
 flags_transparent = true
@@ -26,7 +27,7 @@ params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_texture = ExtResource( 2 )
+albedo_texture = ExtResource( 3 )
 
 [sub_resource type="QuadMesh" id=7]
 material = SubResource( 6 )
@@ -56,14 +57,14 @@ material = SubResource( 10 )
 [node name="confetti_emitter" type="Spatial"]
 script = ExtResource( 5 )
 
-[node name="CPUParticles" type="CPUParticles" parent="."]
+[node name="CPUParticles2" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.196863 )
 emitting = false
 amount = 32
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
-explosiveness = 0.76
-randomness = 0.28
+explosiveness = 0.7
 mesh = SubResource( 5 )
 emission_shape = 5
 emission_ring_radius = 0.01
@@ -71,21 +72,23 @@ emission_ring_inner_radius = 0.0
 emission_ring_height = 16.08
 emission_ring_axis = Vector3( 0, 0, 1 )
 direction = Vector3( 200, 320, 0 )
-spread = 23.12
-flatness = 1.0
+spread = 30.0
+flatness = 0.5
 gravity = Vector3( 0, -5, 0 )
 initial_velocity = 10.0
-damping = 0.92
 scale_amount_curve = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="CPUParticles4" type="CPUParticles" parent="."]
+[node name="CPUParticles5" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.196863 )
 emitting = false
 amount = 32
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
-explosiveness = 0.5
-randomness = 0.28
+explosiveness = 0.7
 mesh = SubResource( 7 )
 emission_shape = 5
 emission_ring_radius = 0.01
@@ -93,42 +96,47 @@ emission_ring_inner_radius = 0.0
 emission_ring_height = 16.08
 emission_ring_axis = Vector3( 0, 0, 1 )
 direction = Vector3( 200, 320, 0 )
-spread = 23.12
-flatness = 1.0
+spread = 30.0
+flatness = 0.5
 gravity = Vector3( 0, -5, 0 )
 initial_velocity = 10.0
-damping = 0.92
 scale_amount_curve = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="CPUParticles3" type="CPUParticles" parent="."]
+[node name="CPUParticles4" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.196863 )
 emitting = false
 amount = 32
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
-explosiveness = 0.71
-randomness = 0.28
+explosiveness = 0.7
 mesh = SubResource( 9 )
 emission_shape = 5
 emission_ring_radius = 0.01
 emission_ring_inner_radius = 0.0
 emission_ring_height = 16.08
 emission_ring_axis = Vector3( 0, 0, 1 )
-direction = Vector3( 100, 320, 0 )
-spread = 18.17
-gravity = Vector3( 2, -5, 0 )
+direction = Vector3( 200, 320, 0 )
+spread = 30.0
+flatness = 0.5
+gravity = Vector3( 0, -5, 0 )
 initial_velocity = 10.0
-damping = 1.84
 scale_amount_curve = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="CPUParticles2" type="CPUParticles" parent="."]
+[node name="CPUParticles3" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.196863 )
 emitting = false
 amount = 32
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
-explosiveness = 0.71
-randomness = 0.28
+explosiveness = 0.7
 mesh = SubResource( 11 )
 emission_shape = 5
 emission_ring_radius = 0.01
@@ -136,8 +144,11 @@ emission_ring_inner_radius = 0.0
 emission_ring_height = 16.08
 emission_ring_axis = Vector3( 0, 0, 1 )
 direction = Vector3( 200, 320, 0 )
-spread = 16.51
+spread = 30.0
+flatness = 0.5
 gravity = Vector3( 0, -5, 0 )
 initial_velocity = 10.0
-damping = 0.92
 scale_amount_curve = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}

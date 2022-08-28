@@ -4,8 +4,10 @@ extends WorldEnvironment
 func _ready():
 	var environment = self.get_environment()
 	var sky = environment.get_sky()
-	sky.set_sky_horizon_color("ffffff")
 	sky.set_sky_top_color("ffffff") 
+	sky.set_sky_horizon_color("ffffff")
+	sky.set_sky_curve(0.0)
 	sky.set_ground_bottom_color("ffffff")
 	sky.set_ground_horizon_color("ffffff")
+	sky.set_ground_curve(0.0)
 	set_environment(environment)

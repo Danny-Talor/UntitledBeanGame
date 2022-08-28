@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/confetti.png-3f1dc2a9c476c7a3d68cab6cff989310.s3tc.stex"
-path.etc2="res://.import/confetti.png-3f1dc2a9c476c7a3d68cab6cff989310.etc2.stex"
+path.s3tc="res://.import/confetti.png-92542e32daeab46ae56e380cc02b45eb.s3tc.stex"
+path.etc2="res://.import/confetti.png-92542e32daeab46ae56e380cc02b45eb.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/confetti.png"
-dest_files=[ "res://.import/confetti.png-3f1dc2a9c476c7a3d68cab6cff989310.s3tc.stex", "res://.import/confetti.png-3f1dc2a9c476c7a3d68cab6cff989310.etc2.stex" ]
+source_file="res://assets/particles/confetti.png"
+dest_files=[ "res://.import/confetti.png-92542e32daeab46ae56e380cc02b45eb.s3tc.stex", "res://.import/confetti.png-92542e32daeab46ae56e380cc02b45eb.etc2.stex" ]
 
 [params]
 
