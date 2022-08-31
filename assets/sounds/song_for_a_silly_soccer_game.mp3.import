@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/song_for_a_silly_soccer_game.mp3-99e5cbfabda3b7ad922b65fe12926a32.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/song_for_a_silly_soccer_game.mp3"
+dest_files=[ "res://.import/song_for_a_silly_soccer_game.mp3-99e5cbfabda3b7ad922b65fe12926a32.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/dev_textures/Dark/texture_08.png" type="Texture" id=1]
+[ext_resource path="res://assets/dev_textures/Red/texture_08.png" type="Texture" id=2]
+[ext_resource path="res://entities/Player/hardpoint.gd" type="Script" id=3]
+[ext_resource path="res://entities/Player/Player.gd" type="Script" id=6]
+[ext_resource path="res://objects/raygun.tscn" type="PackedScene" id=8]
+
+[sub_resource type="CapsuleShape" id=2]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="CylinderMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("player_model/body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player_model/hardpoint:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.13673, 0.164566, -0.25431 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("player_model/body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player_model/hardpoint:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.13673, 0.164566, -0.25431 ), Vector3( 100, 0.165, -0.254 ) ]
+}
+
+[node name="Player" type="KinematicBody"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="player_model" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+
+[node name="body" type="MeshInstance" parent="player_model"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 7 )
+
+[node name="sunglasses" type="MeshInstance" parent="player_model/body"]
+transform = Transform( -0.016711, 1.77416e-15, 0.673913, -0.335913, -8.67071e-09, -0.0335258, 1.46832e-08, -0.198363, 1.46546e-09, 0.0179687, -0.639348, -0.604725 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="l_ear" type="MeshInstance" parent="player_model/body"]
+transform = Transform( 0.489873, 0.0143025, -0.260252, -0.0243701, 0.287499, 0.012947, 1.2235, -6.60478e-08, 0.10446, -0.418616, 0.0155908, -0.978833 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 8 )
+
+[node name="r_ear" type="MeshInstance" parent="player_model/body"]
+transform = Transform( -0.425095, 0.0143025, -0.265367, 0.0211477, 0.287499, 0.0132015, 1.24754, -6.70988e-08, -0.0906469, 0.472769, -0.0287538, -0.978833 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 9 )
+
+[node name="hardpoint" type="Spatial" parent="player_model"]
+transform = Transform( 0.89485, 0, 0, 0, 1, 0, 0, 0, 1, 1.13673, 0.164566, -0.25431 )
+script = ExtResource( 3 )
+
+[node name="raygun" parent="player_model/hardpoint" instance=ExtResource( 8 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 10 )
+anims/death = SubResource( 11 )

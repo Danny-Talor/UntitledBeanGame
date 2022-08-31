@@ -1,12 +1,20 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://game/Ground.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/goal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/Area.gd" type="Script" id=4]
 [ext_resource path="res://objects/Ball.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sounds/song_for_a_silly_soccer_game.mp3" type="AudioStream" id=6]
 [ext_resource path="res://game/WorldEnvironment.gd" type="Script" id=7]
 [ext_resource path="res://particles/confetti_emitter.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/Player/RichTextLabel.gd" type="Script" id=9]
+[ext_resource path="res://entities/Player/Camera.gd" type="Script" id=10]
+[ext_resource path="res://entities/Player/HSlider.gd" type="Script" id=11]
+[ext_resource path="res://entities/EnemySpawner.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/Ramp.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/BreakableWall.tscn" type="PackedScene" id=14]
+[ext_resource path="res://game/World.gd" type="Script" id=15]
 
 [sub_resource type="ProceduralSky" id=7]
 sun_latitude = 0.0
@@ -81,7 +89,38 @@ tracks/1/keys = {
 "values": [ 0.5, 8.0, 0.5 ]
 }
 
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "health_lost_animation"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1e-05, 0.105112, 1e-05 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0, 0, 0.321569 ), Color( 1, 0, 0, 0 ) ]
+}
+
 [node name="World" type="Spatial"]
+script = ExtResource( 15 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 8 )
@@ -125,6 +164,86 @@ transform = Transform( -4.9685e-08, 0, -0.900183, 0, 1.21801, 0, 1.13666, 0, -3.
 
 [node name="confetti_emitter" parent="goal2" instance=ExtResource( 8 )]
 transform = Transform( -4.0402e-08, 0, 0.636088, 0, 1, 0, -1, 0, -2.36255e-08, 1.99268e-08, -0.101035, 0.575626 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 19.5806, 20.2351 )
+projection = 1
+size = 20.0
+script = ExtResource( 10 )
+
+[node name="Control" type="Control" parent="Camera"]
+margin_right = 1366.0
+margin_bottom = 720.0
+
+[node name="HSlider" type="HSlider" parent="Camera/Control"]
+margin_left = 785.0
+margin_top = 8.0
+margin_right = 1096.0
+margin_bottom = 35.0
+min_value = 10.0
+value = 39.0
+script = ExtResource( 11 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera/Control"]
+margin_left = 18.0
+margin_top = 17.0
+margin_right = 294.0
+margin_bottom = 32.0
+rect_scale = Vector2( 2, 2 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[b][color=<code/black>]Score: [/color][/b]"
+text = "Score: "
+script = ExtResource( 9 )
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera/Control"]
+margin_left = 519.0
+margin_top = 7.0
+margin_right = 651.0
+margin_bottom = 22.0
+rect_scale = Vector2( 2, 2 )
+bbcode_enabled = true
+text = "camera distance: xx"
+scroll_active = false
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Camera/Control"]
+margin_left = 1225.0
+margin_top = 8.0
+margin_right = 1290.0
+margin_bottom = 23.0
+rect_scale = Vector2( 2, 2 )
+bbcode_enabled = true
+text = "fps"
+
+[node name="ColorRect" type="ColorRect" parent="Camera/Control"]
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 1375.0
+margin_bottom = 731.0
+color = Color( 1, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/Control"]
+anims/RESET = SubResource( 9 )
+anims/health_lost_animation = SubResource( 10 )
+
+[node name="EnemySpawner" parent="." instance=ExtResource( 12 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+
+[node name="Ramp" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 2.33225, 0, 0, 0, 1.01452, -29.8649, 2.25986, 0 )
+
+[node name="Ramp2" parent="." instance=ExtResource( 13 )]
+transform = Transform( -1, 0, -8.86923e-08, 0, 2.33225, 0, 8.74228e-08, 0, -1.01452, 29.865, 2.26, 0 )
+
+[node name="BreakableWall" parent="." instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 0.747006, 0, 1, 0, -4.37114e-08, -21.8726, 0, -19.32 )
+
+[node name="BreakableWall2" parent="." instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 0.747006, 0, -1, 0, -4.37114e-08, 21.9256, 0, 19.3245 )
 
 [connection signal="body_entered" from="Area" to="Area" method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="Area" method="_on_Area_body_exited"]

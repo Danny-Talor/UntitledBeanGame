@@ -1,0 +1,140 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/dev_textures/Light/texture_07.png" type="Texture" id=1]
+[ext_resource path="res://assets/dev_textures/Dark/texture_09.png" type="Texture" id=2]
+[ext_resource path="res://entities/Enemy/Enemy.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/enemy_pop.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/particles/confetti.png" type="Texture" id=5]
+
+[sub_resource type="SphereMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="SphereMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="SphereShape" id=5]
+
+[sub_resource type="CylinderShape" id=6]
+
+[sub_resource type="CapsuleShape" id=14]
+radius = 1.2
+height = 2.0
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Eye:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -0.574243 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "float"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -0.3, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=12]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0, 0, 1 )
+albedo_texture = ExtResource( 5 )
+
+[sub_resource type="QuadMesh" id=11]
+material = SubResource( 12 )
+
+[sub_resource type="Curve" id=13]
+max_value = 2.0
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Enemy" type="KinematicBody"]
+collision_mask = 3
+axis_lock_motion_y = true
+move_lock_y = true
+script = ExtResource( 3 )
+
+[node name="Body" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Eye" type="MeshInstance" parent="Body"]
+transform = Transform( 0.491413, 0, 0.0922673, 0, 0.5, 0, -0.0922673, 0, 0.491413, 0, 0, -0.574243 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 5 )
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 13.1189, 0, 0, 0, 2.87807, 0, 0, 0, 14.0929, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Hitbox" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
+transform = Transform( 0.879122, 0, 0, 0, -3.11274e-08, -0.712112, 0, 0.889298, -3.88725e-08, 0, -0.467086, 0 )
+shape = SubResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 8 )
+anims/float = SubResource( 9 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="CPUParticles" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.114945 )
+emitting = false
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource( 11 )
+direction = Vector3( 0, 300, 200 )
+spread = 57.27
+gravity = Vector3( 0, 0, 10 )
+initial_velocity = 4.0
+scale_amount_curve = SubResource( 13 )
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
